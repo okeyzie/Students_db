@@ -136,6 +136,18 @@ app.delete("/student/:id", (req, res) => {
   });
 });
 
+database.query(
+  "ALTER TABLE scores DROP FOREIGN KEY scores_ibfk_1",
+  (error, result) => {
+    if (error) {
+      console.error("Error dropping foreign key:", error.message);
+    } else {
+      console.log("Foreign key dropped successfully:", result);
+    }
+  }
+);
+
+
 // Add a score
 app.post("/score", (req, res) => {
   const { student_id, punctuality_score, assignment_score } = req.body;
